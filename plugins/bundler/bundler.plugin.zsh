@@ -9,6 +9,7 @@ alias bl="bundle list"
 alias bo="bundle open"
 alias bout="bundle outdated"
 alias bp="bundle package"
+alias bo="bundle open"
 alias bu="bundle update"
 
 ## Functions
