@@ -80,3 +80,6 @@ extract() {
 		shift
 	done
 }
+
+alias x=extract
+
