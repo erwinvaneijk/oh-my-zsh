@@ -32,6 +32,7 @@ function git_prompt_info() {
   echo "${ZSH_THEME_GIT_PROMPT_PREFIX}${ref}${upstream}$(parse_git_dirty)${ZSH_THEME_GIT_PROMPT_SUFFIX}"
 }
 
+
 # Checks if working tree is dirty
 function parse_git_dirty() {
   local STATUS
