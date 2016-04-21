@@ -35,15 +35,11 @@ ys_hg_prompt_info() {
 	fi
 }
 
-local exit_code="%(?,%?,%{$fg[red]%}%?%{$reset_color%})"
+local exit_code="%(?,,C:%{$fg[red]%}%?%{$reset_color%})"
 
 # Prompt format:
 #
-# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE [TIME] tty:$TTY L:$SHELL_LEVEL N:LINE_NUM C:LAST_EXIT_CODE
-# $ COMMAND
-#
-# For example:
-#
+# PRIVILEGES USER @ MACHINE in DIRECTORY on git:BRANCH STATE [TIME] C:LAST_EXIT_CODE
 # % ys @ ys-mbp in ~/.oh-my-zsh on git:master x [21:47:42] tty:s000 L:1 N:12 C:0
 # $
 PROMPT="
