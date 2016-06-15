@@ -11,6 +11,9 @@ function btrestart() {
   sudo kextload -b com.apple.iokit.BroadcomBluetoothHostControllerUSBTransport
 }
 
+# Open the current directory in a Finder window
+alias ofd='open_command $PWD'
+
 function _omz_osx_get_frontmost_app() {
   osascript 2>/dev/null <<EOF
     tell application "System Events"
