@@ -1,0 +1,49 @@
+#compdef ag
+
+local arguments matchers command
+
+if [[ $service = *GREP_OPT* ]]; then
+  compset -q
+  words=( fake "$words[@]" )
+  (( CURRENT++ ))
+  command=grep
+else
+  arguments=(
+    '(-e --regexp -f --file)1: :_guard "^--*" pattern'
+    '*:files:_files'
+  )
+  command="$words[1]"
+fi
+
+if [[ $service != ag ]]; then
+  matchers='(--extended-regexp --fixed-strings --basic-regexp --perl-regexp -E -F -G -P)'
+  arguments+=(
+    $matchers{--extended-regexp,-E}'[use extended regular expression]'
+    $matchers{--fixed-strings,-F}'[use literal strings]'
+    $matchers{--basic-regexp,-G}'[use basic regular expression]'
+    $matchers{--perl-regexp,-P}'[use perl regular expression]'
+  )
+fi
+
+arguments=( $arguments[@]
+'(--after -A)'{--after=,-A+}'[specify lines of trailing context]:lines'
+'(--before -B)'{--before=,-B+}'[specify lines of leading context]:lines'
+'(--nobreak --break)'{--nobreak,--break}'[Print newlines between matches in different files]'
+'(--count -c --byte-offset -b --line-number -n)'{--count,-c}'[only print a count of matching lines]'
+'(--color --colour)--'{color,colour}'=-[distinguish matching string]::when:(always never auto)'
+'(--context,-C)'{--context=,-C-}'[specify lines of context]:lines'
+'(--only-matching -o)'{--only-matching,-o}'[show only matching part of line]'
+  '(--files-without-matches -L --file-with-matches -l --no-filename -h)'{--files-without-match,-L}"[output non-matching files' names only]"
+  '(--files-with-matches -l --files-without-match -L --no-filename -h)'{--files-with-matches,-l}"[output matching files' names only]"
+'(--null -Z --no-filename -h)'{--null,-Z}'[print 0 byte after FILE name]'
+'--help[display help]'
+'(--all-types -a)'{--all-types,-a}'[Search all files (does not include hidden files or patterns from ignore files)]'
+'(--follow -f)'{--follow,-f}'[Follow symlinks]'
+'(--ignore-case -i)'{--ignore-case,-i}'[Match case insensitively]'
+'(--case-sensitive -s)'{--case-sensitive,-s}'[Match case sensitively]'
+'(--max-count -m)'{--max-count=,-m+}'[Skip the rest of the file after more than num matches]'
+'(--search-zip,-z)'{--search-zip,-z}'[Search contents of compressed (e.g., gzip) files]'
+'(--all-text,-t)'{--all-text,-t}'[Search all text files (does not include hidden files)]'
+)
+
+_arguments -S -s $arguments[@]
