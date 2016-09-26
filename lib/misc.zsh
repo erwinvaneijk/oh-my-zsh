@@ -30,6 +30,8 @@ if (( $+commands[ag] )); then
   alias afind='ag -il'
 elif (( $+commands[ack-grep] )); then
   alias afind='ack-grep -il'
+elif which ag &> /dev/null; then
+  alias afind='/usr/local/bin/ag -il'
 else
   alias afind='ack -il'
 fi
