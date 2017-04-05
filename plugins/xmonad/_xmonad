@@ -1,0 +1,26 @@
+#compdef xmonad
+#autoload
+
+_xmonad() {
+    local -a commands
+    commands=(
+    '--restart:restart the running xmonad instance'
+    '--recompile:recompile the current configuration'
+    )
+
+    if (( CURRENT == 2 )); then
+        _describe -t commands 'commands' commands
+    fi
+
+    return 0
+}
+
+_xmonad
+
+# Local Variables:
+# mode: Shell-Script
+# sh-indentation: 4
+# indent-tabs-mode: nil
+# sh-basic-offset: 4
+# End
+# vim: ft=zsh sw=4 ts=4 et
