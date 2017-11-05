@@ -14,3 +14,5 @@ for c in $sudo_commands; do; alias sc-$c="sudo systemctl $c"; done
 alias sc-enable-now="sc-enable --now"
 alias sc-disable-now="sc-disable --now"
 alias sc-mask-now="sc-mask --now"
+
+alias local-log='journalctl -b -u $(systemctl list-units -t scope | awk "/user $USER/{ print \$1}")'
