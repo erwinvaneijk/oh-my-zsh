@@ -14,3 +14,4 @@ for c in $sudo_commands; do; alias sc-$c="sudo systemctl $c"; done
 alias sc-enable-now="sc-enable --now"
 alias sc-disable-now="sc-disable --now"
 alias sc-mask-now="sc-mask --now"
+alias journalctl="/sbin/journalctl --file=/var/log/journal/$(cat /etc/machine-id)/system.journal"
