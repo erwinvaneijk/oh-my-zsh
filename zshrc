@@ -1,32 +1,33 @@
 # Path to your oh-my-zsh configuration.
 
-# Convenience function
+# Returns whether the given command is executable or aliased.
 _has() {
-    return $( whence $1 >/dev/null )
-}
+  return $( whence $1 >/dev/null )
+  }
 
 ZSH=$HOME/.oh-my-zsh
+
 # Set name of the theme to load.
 # Look in ~/.oh-my-zsh/themes/
 # Optionally, if you set this to "random", it'll load a random theme each
 # time that oh-my-zsh is loaded.
+#ZSH_THEME="eastwood"
+#ZSH_THEME="strug"
+ZSH_THEME="bullet-train"
 
 HISTFILE=${HOME}/.zshhistory.${HOST}
 
 POWERLEVEL9K_INSTALLATION_PATH=$ZSH/themes/powerlevel9k
 
-# DEFAULT_FOREGROUND=006
-# DEFAULT_BACKGROUND=235
-DEFAULT_FOREGROUND=22
-DEFAULT_BACKGROUND=148
+DEFAULT_FOREGROUND=006 DEFAULT_BACKGROUND=235
 DEFAULT_COLOR=$DEFAULT_FOREGROUND
 
 # powerlevel9k prompt theme
 #DEFAULT_USER=$USER
 
 POWERLEVEL9K_MODE="nerdfont-complete"
-POWERLEVEL9K_SHORTEN_DIR_LENGTH=1
-POWERLEVEL9K_SHORTEN_STRATEGY="truncate_right"
+POWERLEVEL9K_SHORTEN_DIR_LENGTH=4
+#POWERLEVEL9K_SHORTEN_STRATEGY="truncate_right"
 
 POWERLEVEL9K_DIR_OMIT_FIRST_CHARACTER=false
 
@@ -173,9 +174,6 @@ BULLETTRAIN_STATUS_EXIT_SHOW=true
 BULLETTRAIN_EXEC_TIME_SHOW=true
 BULLETTRAIN_CONTEXT_SHOW=true
 
-#ZSH_THEME=bullet-train
-ZSH_THEME=powerlevel9k
-
 zstyle :omz:plugins:ssh-agent agent-forwarding on
 zstyle :omz:plugins:ssh-agent id_rsa identity id_dsa
 
@@ -199,11 +197,13 @@ COMPLETION_WAITING_DOTS="true"
 # ~/.oh-my-zsh/plugins/*)
 # Custom plugins may be added to ~/.oh-my-zsh/custom/plugins/
 # Example format: plugins=(rails git textmate ruby lighthouse)
-plugins=(gitfast )
+# Excluded: vi-mode.
+plugins=(svn gitfast mercurial)
 plugins=($plugins python rake cabal)
 plugins=($plugins sbt scala gradle mvn)
 plugins=($plugins jsontools)
 plugins=($plugins ag pip)
+plugins=($plugins autoenv)
 plugins=($plugins systemd)
 plugins=($plugins common-aliases)
 plugins=($plugins autojump up z colored-man ssh rsync screen)
@@ -233,11 +233,25 @@ if [ -x /usr/local/bin/vim ]; then
     alias vi=/usr/local/bin/vim
 fi
 
+export MANPAGER="env MAN_PN=1 /usr/local/bin/vim -M +MANPAGER -"
+vim() {
+    /usr/local/bin/vim $*
+}
+alias vi=/usr/local/bin/vim
+
 setopt incappendhistory
 unsetopt share_history
 
+
+bindkey '^P' history-substring-search-up
+bindkey '^N' history-substring-search-down
+bindkey '^?' backward-delete-char
+bindkey '^h' backward-delete-char
+bindkey '^w' backward-kill-word
 bindkey -M viins '^f' forward-char
 bindkey -M viins '^b' backward-char
+
+export KEYTIMEOUT=1
 
 # Make sure we get EURO's, I don't care about the rest.
 export LC_MONETARY=en_IE.UTF-8
@@ -261,11 +275,14 @@ else
         [[ $- == *i* ]] && source "$HOME/.fzf/shell/completion.zsh" 2>/dev/null
         source "$HOME/.fzf/shell/key-bindings.zsh"
     fi
-    export FZF_DEFAULT_OPTS='
-        --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
-        --color info:108,prompt:109,spinner:108,pointer:168,marker:168'
+    if _has fzf && _has ag; then
+        export FZF_DEFAULT_OPTS='
+            --color fg:242,bg:236,hl:65,fg+:15,bg+:239,hl+:108
+            --color info:108,prompt:109,spinner:108,pointer:168,marker:168
+            '
+    fi
 fi
 
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
 
 # end of file
-
