@@ -1,13 +1,13 @@
 # Activates autoenv or reports its failure
 () {
 if ! type autoenv_init >/dev/null; then
-  for d (~/.autoenv ~/.local/bin /usr/local/opt/autoenv /usr/local/bin); do
+    for d (~/.autoenv ~/.local/bin /usr/local/opt/autoenv /usr/local/bin /usr/bin); do
     if [[ -e $d/activate.sh ]]; then
       autoenv_dir=$d
       break
     fi
   done
-  if [[ -z $autoenv_dir ]]; then 
+  if [[ -z $autoenv_dir ]]; then
     cat <<END >&2
 -------- AUTOENV ---------
 Could not locate autoenv installation.

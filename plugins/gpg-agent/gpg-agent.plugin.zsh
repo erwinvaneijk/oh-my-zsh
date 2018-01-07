@@ -12,3 +12,4 @@ if [ -r "$GNUPGCONFIG" ] && grep -q enable-ssh-support "$GNUPGCONFIG"; then
   export SSH_AUTH_SOCK=$GPG_AGENT_SOCKET
 fi
 
+gpg-connect-agent updatestartuptty /bye >/dev/null
