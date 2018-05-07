@@ -2,7 +2,11 @@
 # Use with caution
 #
 
+export QUOTING_STYLE=literal
 # ls, the common ones I use a lot shortened for rapid fire usage
+if [ -x /usr/bin/exa ]; then
+    alias ls='/usr/bin/exa'
+fi
 alias l='ls -lFh'     #size,show type,human readable
 alias la='ls -lAFh'   #long list,show almost all,show type,human readable
 alias lr='ls -tRFh'   #sorted by date,recursive,show type,human readable
