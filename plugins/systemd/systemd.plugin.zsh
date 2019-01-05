@@ -10,9 +10,16 @@ sudo_commands=(
 
 for c in $user_commands; do; alias sc-$c="systemctl $c"; done
 for c in $sudo_commands; do; alias sc-$c="sudo systemctl $c"; done
+for c in $user_commands; do; alias scu-$c="systemctl --user $c"; done
+for c in $sudo_commands; do; alias scu-$c="systemctl --user $c"; done
 
 alias sc-enable-now="sc-enable --now"
 alias sc-disable-now="sc-disable --now"
 alias sc-mask-now="sc-mask --now"
+
+alias scu-enable-now="scu-enable --now"
+alias scu-disable-now="scu-disable --now"
+alias scu-mask-now="scu-mask --now"
+
 alias journalctl="/sbin/journalctl --file=/var/log/journal/$(cat /etc/machine-id)/system.journal"
 alias local-log='journalctl -b -u $(systemctl list-units -t scope | awk "/user $USER/{ print \$1}")'
