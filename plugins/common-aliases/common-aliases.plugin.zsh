@@ -4,15 +4,16 @@
 
 export QUOTING_STYLE=literal
 # ls, the common ones I use a lot shortened for rapid fire usage
-if [ -x /usr/bin/exa ]; then
-    alias ls='/usr/bin/exa'
-    alias l='exa -lbF --git'
-    alias ll='exa -lbGF --git'
-    alias llm='exa -lbGF --git --sort=modified'
-    alias la='exa -lbhHigUmuSa --time-style=long-iso --git --color-scale'
-    alias lx='exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale'
-    alias lS='exa -1'
-    alias lt='exa --tree --level=2'
+_EXA=$(which exa)
+if [ -n _EXA ]; then
+    alias ls=$_EXA
+    alias l="$_EXA -lbF --git"
+    alias ll="$_EXA -lbGF --git"
+    alias llm="$_EXA -lbGF --git --sort=modified"
+    alias la="$_EXA -lbhHigUmuSa --time-style=long-iso --git --color-scale"
+    alias lx="$_EXA -lbhHigUmuSa@ --time-style=long-iso --git --color-scale"
+    alias lS="$_EXA -1"
+    alias lt="$_EXA --tree --level=2"
 else
     alias l='ls -lFh'     #size,show type,human readable
     alias la='ls -lAFh'   #long list,show almost all,show type,human readable
