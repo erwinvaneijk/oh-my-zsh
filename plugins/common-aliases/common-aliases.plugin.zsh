@@ -6,14 +6,14 @@ export QUOTING_STYLE=literal
 # ls, the common ones I use a lot shortened for rapid fire usage
 _EXA=$(which exa)
 if [ -n _EXA ]; then
-    alias ls=$_EXA
-    alias l="$_EXA -lbF --git"
-    alias ll="$_EXA -lbGF --git"
-    alias llm="$_EXA -lbGF --git --sort=modified"
-    alias la="$_EXA -lbhHigUmuSa --time-style=long-iso --git --color-scale"
-    alias lx="$_EXA -lbhHigUmuSa@ --time-style=long-iso --git --color-scale"
-    alias lS="$_EXA -1"
-    alias lt="$_EXA --tree --level=2"
+    alias ls="$_EXA --group-directories-first"
+    alias l="$_EXA -lbF --git --group-directories-first"
+    alias ll="$_EXA -lbGF --git --group-directories-first"
+    alias llm="$_EXA -lbGF --git --sort=modified --group-directories-first"
+    alias la="$_EXA -lbhHigUmuSa --time-style=long-iso --git --color-scale --group-directories-first"
+    alias lx="$_EXA -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --group-directories-first"
+    alias lS="$_EXA -1 --group-directories-first"
+    alias lt="$_EXA --tree --level=2 --group-directories-first"
 else
     alias l='ls -lFh'     #size,show type,human readable
     alias la='ls -lAFh'   #long list,show almost all,show type,human readable
