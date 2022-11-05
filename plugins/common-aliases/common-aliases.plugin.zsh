@@ -24,6 +24,8 @@ else
     alias lS='ls -1FSsh'
     alias lart='ls -1Fcart'
     alias lrt='ls -1Fcrt'
+    alias lsr='ls -lARFh' #Recursive list of files and directories
+    alias lsn='ls -1'     #A column contains name of files and directories
 fi
 
 alias zshrc='${=EDITOR} ${ZDOTDIR:-$HOME}/.zshrc' # Quick access to the .zshrc file
@@ -46,7 +48,7 @@ alias -g NUL="> /dev/null 2>&1"
 alias -g P="2>&1| pygmentize -l pytb"
 
 alias dud='du -d 1 -h'
-alias duf='du -sh *'
+(( $+commands[duf] )) || alias duf='du -sh *'
 (( $+commands[fd] )) || alias fd='find . -type d -name'
 alias ff='find . -type f -name'
 

@@ -24,9 +24,7 @@ compdef _git _git_log_prettily=git-log
 
 # Warn if the current branch is a WIP
 function work_in_progress() {
-  if $(git log -n 1 2>/dev/null | grep -q -c "\-\-wip\-\-"); then
-    echo "WIP!!"
-  fi
+  command git -c log.showSignature=false log -n 1 2>/dev/null | grep -q -- "--wip--" && echo "WIP!!"
 }
 
 # Check if main exists and use instead of master
@@ -100,7 +98,7 @@ alias gcf='git config --list'
 
 function gccd() {
   command git clone --recurse-submodules "$@"
-  [[ -d "$_" ]] && cd "$_" || cd "${${_:h}%.git}"
+  [[ -d "$_" ]] && cd "$_" || cd "${${_:t}%.git}"
 }
 compdef _git gccd=git-clone
 
@@ -251,6 +249,7 @@ alias grbc='git rebase --continue'
 alias grbd='git rebase $(git_develop_branch)'
 alias grbi='git rebase -i'
 alias grbm='git rebase $(git_main_branch)'
+alias grbom='git rebase origin/$(git_main_branch)'
 alias grbo='git rebase --onto'
 alias grbs='git rebase --skip'
 alias grev='git revert'
@@ -295,18 +294,23 @@ alias gstall='git stash --all'
 alias gsu='git submodule update'
 alias gsw='git switch'
 alias gswc='git switch -c'
+alias gswm='git switch $(git_main_branch)'
+alias gswd='git switch $(git_develop_branch)'
 
 alias gts='git tag -s'
 alias gtv='git tag | sort -V'
 alias gtl='gtl(){ git tag --sort=-v:refname -n -l "${1}*" }; noglob gtl'
 
 alias gunignore='git update-index --no-assume-unchanged'
-alias gunwip='git log -n 1 | grep -q -c "\-\-wip\-\-" && git reset HEAD~1'
+alias gunwip='git log -n 1 | grep -q -c "--wip--" && git reset HEAD~1'
 alias gup='git pull --rebase'
 alias gupv='git pull --rebase -v'
 alias gupa='git pull --rebase --autostash'
 alias gupav='git pull --rebase --autostash -v'
+alias gupom='git pull --rebase origin $(git_main_branch)'
+alias gupomi='git pull --rebase=interactive origin $(git_main_branch)'
 alias glum='git pull upstream $(git_main_branch)'
+alias gluc='git pull upstream $(git_current_branch)'
 
 alias gwch='git whatchanged -p --abbrev-commit --pretty=medium'
 alias gwip='git add -A; git rm $(git ls-files --deleted) 2> /dev/null; git commit --no-verify --no-gpg-sign -m "--wip-- [skip ci]"'
