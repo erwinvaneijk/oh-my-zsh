@@ -19,6 +19,8 @@ if [[ ! -f "$ZSH_CACHE_DIR/completions/_rustup" ]]; then
 fi
 
 # Generate completion files in the background
+touch "$ZSH_CACHE_DIR/completions/_rustup"
+touch "$ZSH_CACHE_DIR/completions/_cargo"
 rustup completions zsh >| "$ZSH_CACHE_DIR/completions/_rustup" &|
 cat >| "$ZSH_CACHE_DIR/completions/_cargo" <<'EOF'
 #compdef cargo
