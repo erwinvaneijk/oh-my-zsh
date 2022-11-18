@@ -1,3 +1,4 @@
+# systemctl aliases
 user_commands=(
   cat
   get-default

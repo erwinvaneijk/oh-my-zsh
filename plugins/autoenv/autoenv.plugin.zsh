@@ -45,6 +45,7 @@ In the meantime the autoenv plugin is DISABLED.
 END
     return 1
   fi
+  # Load autoenv
   source $autoenv_dir/activate.sh
 fi
 }
@@ -55,17 +56,17 @@ fi
 # It only performs an action if the requested virtualenv is not the current one.
 
 use_env() {
-    typeset venv
-    venv="$1"
-    if [[ "${VIRTUAL_ENV:t}" != "$venv" ]]; then
-        if workon | grep -q "$venv"; then
-            workon "$venv"
-        else
-            echo -n "Create virtualenv $venv now? (Yn) "
-            read answer
-            if [[ "$answer" == "Y" ]]; then
-                mkvirtualenv "$venv"
-            fi
-        fi
+  local venv
+  venv="$1"
+  if [[ "${VIRTUAL_ENV:t}" != "$venv" ]]; then
+    if workon | grep -q "$venv"; then
+      workon "$venv"
+    else
+      echo -n "Create virtualenv $venv now? (Yn) "
+      read answer
+      if [[ "$answer" == "Y" ]]; then
+        mkvirtualenv "$venv"
+      fi
     fi
+  fi
 }

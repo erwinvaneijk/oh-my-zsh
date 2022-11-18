@@ -39,13 +39,13 @@ unset rubies v version
 
 
 function rvm-update {
-	rvm get head
+  rvm get head
 }
 
 # TODO: Make this usable w/o rvm.
 function gems {
-	local current_ruby=`rvm-prompt i v p`
-	local current_gemset=`rvm-prompt g`
+  local current_ruby=`rvm-prompt i v p`
+  local current_gemset=`rvm-prompt g`
 
   gem list $@ | sed -E \
     -e "s/\([0-9, \.]+( .+)?\)/$fg[blue]&$reset_color/g" \

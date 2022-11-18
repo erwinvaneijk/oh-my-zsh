@@ -1,3 +1,5 @@
+#compdef ag
+#autoload
 
 typeset -A opt_args
 

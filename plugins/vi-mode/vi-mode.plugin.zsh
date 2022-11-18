@@ -143,7 +143,3 @@ function vi_mode_prompt_info() {
 if [[ -z "$RPS1" && -z "$RPROMPT" ]]; then
   RPS1='$(vi_mode_prompt_info)'
 fi
-
-# Decrease the esc-lag
-# This is 0.01 seconds.
-export KEYTIMEOUT=1

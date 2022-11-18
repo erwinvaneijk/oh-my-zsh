@@ -83,6 +83,3 @@ EOF
     builtin cd -q "$pwd"
   done
 }
-
-alias x=extract
-
