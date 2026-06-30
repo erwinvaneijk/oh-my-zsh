@@ -49,6 +49,9 @@ function _configure_eza() {
   if zstyle -t ":omz:plugins:eza" "hyperlink"; then
     _EZA_TAIL+=("--hyperlink")
   fi
+  if zstyle -t ":omz:plugins:eza" "no-quotes"; then
+    _EZA_TAIL+=("--no-quotes")
+  fi
 }
 
 _configure_eza
