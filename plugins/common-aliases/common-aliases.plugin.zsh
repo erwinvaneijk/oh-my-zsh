@@ -3,15 +3,15 @@
 #
 
 # ls, the common ones I use a lot shortened for rapid fire usage
-if [ $+commands[exa] ]; then
-    alias ls="exa --group-directories-first"
-    alias l="exa -lbF --git --group-directories-first"
-    alias ll="exa -lbGF --git --group-directories-first"
-    alias llm="exa -lbGF --git --sort=modified --group-directories-first"
-    alias la="exa -lbhHigUmuSa --time-style=long-iso --git --color-scale --group-directories-first"
-    alias lx="exa -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --group-directories-first"
-    alias lS="exa -1 --group-directories-first"
-    alias lt="exa --tree --level=2 --group-directories-first"
+if [ $+commands[eza] ]; then
+    alias ls="eza --group-directories-first"
+    alias l="eza -lbF --git --group-directories-first"
+    alias ll="eza -lbGF --git --group-directories-first"
+    alias llm="eza -lbGF --git --sort=modified --group-directories-first"
+    alias la="eza -lbhHigUmuSa --time-style=long-iso --git --color-scale --group-directories-first"
+    alias lx="eza -lbhHigUmuSa@ --time-style=long-iso --git --color-scale --group-directories-first"
+    alias lS="eza -1 --group-directories-first"
+    alias lt="eza --tree --level=2 --group-directories-first"
 else
     alias l='ls -lFh'     #size,show type,human readable
     alias la='ls -lAFh'   #long list,show almost all,show type,human readable
