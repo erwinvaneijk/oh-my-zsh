@@ -5,10 +5,10 @@ on:
       - opened
       - synchronize
     branches:
-      - master
+      - main
   push:
     branches:
-      - master
+      - main
 
 concurrency:
   group: ${{ github.workflow }}-${{ github.head_ref || github.run_id }}
